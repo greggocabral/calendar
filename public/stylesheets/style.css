@@ -136,9 +136,15 @@ height: 50px;
   background-color:rgba(182, 217, 240, 0.33);
 }
 
-.casillero-dia:hover{
+.casillero-dia:hover {
   background-color: yellow;
+}
 
+.task {
+  background: #F8cccc; 
+  border: #F88888 solid 1px; 
+  padding: 1px;
+  border-radius: 5px;
 }
 
 .tabla-casilleros{
