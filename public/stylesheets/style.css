@@ -1,0 +1,236 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+  font-size: 10px;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+header{
+  display: block;
+  color: black;
+  background-color: white;
+  top: 0px;
+  position: fixed;
+  z-index: 100;
+  width: 100%;r
+}
+
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  f/*ont-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;*/
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+
+h1 {
+  margin: .67em 0;
+  font-size: 2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 0px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    outline: 0;
+    text-decoration: none;
+}
+
+a {
+    color: black;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: black;
+}
+
+
+div{
+  display: block;
+}
+
+.break{
+  clear:both;
+}
+
+.brand{
+  margin-left: 1%;
+  float: left;
+
+}
+
+
+#back-to-present{
+  margin-right: 1%;
+  float: right;
+
+}
+
+.nombre-dias{
+  margin-left: 1.5%;
+
+}
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+  width: 100%;
+}
+.col-xs-2 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 14.2857143%;
+  float: left;
+  
+}
+
+
+.casillero-nombre-dia{
+  min-height: 25px;
+  text-align: center;
+  max-height: 30px;
+  border-color:black;
+  border-style: solid;
+  border-width: thin;
+  margin-bottom: 2px;
+
+}
+
+.casillero-dia{
+height: 50px;
+  border-color:rgba(0, 0, 0, 0.15);
+  border-style: solid;
+  border-width: thin;
+  margin: 0px;
+
+}
+
+.dia-mes-par {
+  background-color:rgba(182, 217, 240, 0.33);
+}
+
+.casillero-dia:hover{
+  background-color: yellow;
+
+}
+
+.tabla-casilleros{
+  margin-top: 48px;
+  margin-left: 1.5%;
+  background-color: white;
+}
+
+.tabla-casilleros:hover{
+
+  cursor: pointer; cursor: hand;
+}
+
+#dialogo-evento{
+  width: 40%;
+  height: 40%;
+  z-index: 999;
+  position: fixed;
+  background-color: white;
+  border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  top: 20%;
+  left:30%;
+  visibility: hidden;
+  border-radius:5px;
+  box-shadow: 5px 5px 5px #ccc;
+}
+
+#cerrar-dialogo-evento{
+  margin: 5px;
+  width: 12%;
+  text-align: center;
+  position: absolute;
+  top: 80%;
+  left: 60%;
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+}
+
+#submit-dialogo-evento{
+  margin: 5px;
+  width: 20%;
+  text-align: center;
+  position: absolute;
+  top: 80%;
+  left:75%;
+  background-color: white;
+  border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+}
+
+#fecha-dialogo-evento{
+  margin-left: 2%;
+}
+
+#texto-evento{
+  border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+  position: absolute;
+  width: 85%;
+  height: 40%;
+  vertical-align: center;
+  margin-left: 2%;
+  margin-right:2%;
+
+
+
+}
+
+#cerrar-dialogo-evento:hover{
+border-color:red;
+cursor: pointer; cursor: hand;
+  
+}
+
+#submit-dialogo-evento:hover{
+border-color: rgb(16, 157, 0);
+cursor: pointer; cursor: hand;
+  
+}
+
+.highlighting-text:hover{
+  color: gray;
+
+}
+
+
