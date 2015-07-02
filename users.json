@@ -1,0 +1,29 @@
+[
+	{
+		"id": 1,
+		"name": "greg@contcal.com",
+		"pass": "greg1",
+		"prefs": {
+			"weeks": 4,
+			"evenMonth": "gray"
+		}
+	},
+	{
+		"id": 2,
+		"name": "lucas@contcal.com",
+		"pass": "lucas1",
+		"prefs": {
+			"weeks": 14,
+			"evenMonth": "blue"
+		}
+	},
+	{
+		"id": 3,
+		"name": "pablo@contcal.com",
+		"pass": "pablo1",
+		"prefs": {
+			"weeks": 24,
+			"evenMonth": "yellow"
+		}
+	}
+]

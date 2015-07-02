@@ -4,9 +4,14 @@ $(document).ready(function() {
 	// PEDIR CON UN GET A LA RUTA traer-eventos TODOS LOS EVENTOS DE EL USUARIO
 	$.get("/traer-eventos", function (data) {
 
-		console.log(typeof(data));
-		dataTest = data.toString();
+		console.log(data);
 
+		dataTest = data;
+/*		dataTest = {
+			"03-07-2015": "coto",
+			"04-07-2015": "dia"
+		};
+*/
 		// RENDERIZAR CALENDARIO VACIO CADA VEZ QUE SE CARGA LA PAGINA (ESTATICO)
 		for (var s=1; s<52; s++){
 			var id = "semana"+s;
@@ -16,22 +21,15 @@ $(document).ready(function() {
 			 		var dia = moment().startOf('week').add(i,"days").format("DD");
 			 		var month = moment().startOf('week').add(i,"days").format("MM");
 			 		var year = moment().startOf('week').add(i,"days").format("YYYY");
+			 		var fullDate = dia + '-' + month + '-' + year;
+			 		var mes = Number(moment().startOf('week').add(i,"days").format("M"));
 
-			 		if (Number(moment().startOf('week').add(i,"days").format("M")) % 2 == 0)
-			 		{
-			 			if (dia == 01) {$("#semana"+s).append('<div id="'+dia+'-'+month+'-'+year+'" class="dia-mes-par col-xs-2 casillero-dia"><h5>'+dia +" "+ moment().startOf('week').add(i,"days").format("MMMM").substring(0, 3) + moment().startOf('week').add(i,"days").format("YY")+'</h5></div>')}
-			 			else{$("#semana"+s).append('<div id="'+dia+'-'+month+'-'+year+'" class="dia-mes-par col-xs-2 casillero-dia"><h5>'+dia+'</h5></div>');}
-			 		}
-
-			 		else
-			 		{
-			 			if (dia == 01) {$("#semana"+s).append('<div id="'+dia+'-'+month+'-'+year+'" class=" col-xs-2 casillero-dia"><h5>'+dia +" "+ moment().startOf('week').add(i,"days").format("MMMM").substring(0, 3) + moment().startOf('week').add(i,"days").format("YY")+'</h5></div>')}
-			 			else{$("#semana"+s).append('<div id="'+dia+'-'+month+'-'+year+'" class="col-xs-2 casillero-dia"><h5>'+dia+'</h5> <p>'+dataTest+' </p> </div>');}
-			 		}		  		
+		 			if (dia == 01) {$("#semana"+s).append('<div id="'+ fullDate +'" class="'+ (mes % 2 == 0 ? "dia-mes-par " : "") + 'col-xs-2 casillero-dia"><h5>'+dia +" "+ moment().startOf('week').add(i,"days").format("MMMM").substring(0, 3) + moment().startOf('week').add(i,"days").format("YY")+'</h5></div>')}
+		 			else{$("#semana"+s).append('<div id="'+ fullDate +'" class="'+ (mes % 2 == 0 ? "dia-mes-par " : "") + 'col-xs-2 casillero-dia"><h5>'+dia+'</h5>' + (typeof(dataTest[fullDate])!="undefined" ? "<h5 class='task'>" + dataTest[fullDate] + "</h5>" : "") + '</div>');}
 			}
 		}
      
-        $( "#01-07-2015" ).click(function() {
+/*        $( "#01-07-2015" ).click(function() {
 	  		var $fecha = $(this)[0].id;
 	  		fechadelevento = $fecha;
 	    	$('#fecha-dialogo-evento').html('<h3>Date: '+$fecha+'</h3>');
@@ -39,7 +37,9 @@ $(document).ready(function() {
 	    	$('.tabla-casilleros').css('opacity', '0.2');
 	    	$('.header').css('opacity', '0.2');
 	    	$('#texto-evento').focus();
-		});           
+		});
+*/
+		generadordeventos(); 
                     
      });
 
@@ -81,12 +81,10 @@ $(document).ready(function() {
 			var tarea = $('#texto-evento').text();
 			console.log(tarea);
 			$('#texto-evento').html('');
-			$("#"+fechadelevento).append('<h5>'+tarea+'</h5>');
+			$("#"+fechadelevento).append('<h5 class="task">'+tarea+'</h5>');
 		});
 	}	
 	
-
-	generadordeventos(); 
 
 	// PEDIR BASE DE DATOS EN JSON A SERVER CON HTTP GET
 	// MOSTRAR EN CALENDARIO LOS EVENTOS LEVANTADOS DE LA BASE DE DATOS
