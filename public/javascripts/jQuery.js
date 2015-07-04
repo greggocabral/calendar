@@ -80,6 +80,7 @@ $(document).ready(function() {
 			console.log(fechadelevento);
 			var tarea = $('#texto-evento').text();
 			console.log(tarea);
+			$.post( "/postear-eventos", { date: fechadelevento, summary: tarea } );
 			$('#texto-evento').html('');
 			$("#"+fechadelevento).append('<h5 class="task">'+tarea+'</h5>');
 		});
