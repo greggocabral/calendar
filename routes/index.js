@@ -22,15 +22,11 @@ var retrieveEvents = function(db, callback) {
 
 
 // Post Events
-var postEvents = function(db, eventDate, eventSummary, callback) {
+var postEvents = function(db, eventoNuevo, callback) {
   // Get the events collection
   var collection = db.collection('events');
-  collection.insert([{"date" : eventDate, "summary": eventSummary}], function(err, result) {
-  // collection.update({ a : 2 }, { $set: { b : 1 } }, function(err, result) {
-  // collection.remove( {a : 3}, function(err, result) {
+  collection.insert([eventoNuevo], function(err, result) {
     assert.equal(err, null);
-    // assert.equal(1, result.result.n);
-    // assert.equal(3, result.ops.length);
     console.log("posteado el evento");
     callback(result);
   });
@@ -59,17 +55,9 @@ router.get('/traer-eventos', function(req, res) {
 	  retrieveEvents(db, function (eventsDB){
 
 	  	var eventsOK = {};
-
-		// reordenar los eventsOK en el formato que "debe" recibir el cliente
-
-		// 1. recorrer todos los eventos de eventsDB
 		eventsDB.forEach(function(cadaevento){
 			eventsOK[cadaevento.date] = cadaevento.summary;
 		});
-		// 2. para cada evento, genero en dataTest una key con la fecha y value con el summary
-
-
-
 
 		res.contentType('application/json');
 		res.end(JSON.stringify(eventsOK));
@@ -80,19 +68,29 @@ router.get('/traer-eventos', function(req, res) {
 
 	});
 
-		dataTest = {
+/*		dataTest = {
 			"03-07-2015": "ir al super",
 			"04-07-2015": "futbol",
 			"10-07-2015": "lavar ropa"
-		};
-
+		};*/
 		/*res.contentType('application/json');
 		res.end(JSON.stringify(dataTest));*/
 });
 
 router.post('/postear-eventos', function(req, res) {
 	console.log('llego envío de cliente');
-	console.log(req.data);
+	console.log(req.body);
+	var eventoPosteado = req.body;
+
+	MongoClient.connect(url, function(err, db) {
+	  assert.equal(null, err);
+	  console.log("Connected correctly to server");
+	  postEvents(db, eventoPosteado, function (){
+		db.close();
+	  });
+
+	});
+
 });
 
 module.exports = router;
