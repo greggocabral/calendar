@@ -1,6 +1,37 @@
 var express = require('express');
 var router = express.Router();
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
 var fs = require('fs');
+
+// Connection URL
+var url = 'mongodb://localhost:27017/contcal';
+// Retrieve Events
+var retrieveEvents = function(db, callback) {
+  // Get the events collection
+  var collection = db.collection('events');
+  collection.find({}).toArray(function(err, docs) {
+    assert.equal(err, null);
+    console.log("Found the following records");
+    console.dir(JSON.stringify(docs));
+    // console.dir(JSON.stringify(docs[0]));
+	callback(docs);
+  });
+}
+
+
+
+// Post Events
+var postEvents = function(db, eventoNuevo, callback) {
+  // Get the events collection
+  var collection = db.collection('events');
+  collection.insert([eventoNuevo], function(err, result) {
+    assert.equal(err, null);
+    console.log("posteado el evento");
+    callback(result);
+  });
+}
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,20 +49,48 @@ router.get('/traer-eventos', function(req, res) {
   	// supongo que 
   	// próximo paso: filtrar los eventos para cierto user
 
-	fs.readFile('./events.json', function (err, data) {
+	MongoClient.connect(url, function(err, db) {
+	  assert.equal(null, err);
+	  console.log("Connected correctly to server");
+	  retrieveEvents(db, function (eventsDB){
 
-		if (err) throw err;
+	  	var eventsOK = {};
+		eventsDB.forEach(function(cadaevento){
+			eventsOK[cadaevento.date] = cadaevento.summary;
+		});
 
-		dataTest = {
+		res.contentType('application/json');
+		res.end(JSON.stringify(eventsOK));
+
+
+		db.close();
+	  });
+
+	});
+
+/*		dataTest = {
 			"03-07-2015": "ir al super",
 			"04-07-2015": "futbol",
 			"10-07-2015": "lavar ropa"
-		};
+		};*/
+		/*res.contentType('application/json');
+		res.end(JSON.stringify(dataTest));*/
+});
 
-		res.contentType('application/json');
-		res.end(JSON.stringify(dataTest));
+router.post('/postear-eventos', function(req, res) {
+	console.log('llego envío de cliente');
+	console.log(req.body);
+	var eventoPosteado = req.body;
+
+	MongoClient.connect(url, function(err, db) {
+	  assert.equal(null, err);
+	  console.log("Connected correctly to server");
+	  postEvents(db, eventoPosteado, function (){
+		db.close();
+	  });
+
 	});
-  	// res.end('wacho');
+
 });
 
 module.exports = router;
