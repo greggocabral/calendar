@@ -58,7 +58,9 @@ $(document).ready(function() {
 		 var fechadelevento = "";
 
 		$(".highlighting-text").click(function() {
-			$(window).scrollTop(0);
+			$( document.body ).animate({
+  				scrollTop: 0
+			},400);
 		});
 
 		$( ".casillero-dia" ).click(function() {
