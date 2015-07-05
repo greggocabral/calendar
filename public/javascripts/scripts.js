@@ -29,7 +29,14 @@ $(document).ready(function() {
 			 		var dia_texto_mes = (dia == 01 ? " " + moment().startOf('week').add(i,"days").format("MMMM").substring(0, 3) 
 		 												+ moment().startOf('week').add(i,"days").format("YY") : ""); 
 			 		//tasks del dia a incorporar. si no hay tasks vale ""
-			 		var dia_data = (typeof(dataTest[fullDate])!="undefined" ? "<h5 class='task'>" + dataTest[fullDate] + "</h5>" : "");
+			 		var dia_data = "";
+			 		if (fullDate in dataTest) { 
+			 			for (var j = 0; j < dataTest[fullDate].length; j++) {
+			 				dia_data += "<h5 class='task'>" + dataTest[fullDate][j] + "</h5>";
+			 				console.log(dataTest[fullDate][j]);
+			 			};
+			 			// console.log(fullDate + " " + dataTest[fullDate].length);
+			 		};
 		 			// append del casillero dia en cuestion
 		 			$("#semana"+s).append('<div id="'+ dia_id +'" class="'+ dia_class +'"> <h5>'+ dia +' ' + dia_texto_mes + dia_data + '</div>');
 		 		

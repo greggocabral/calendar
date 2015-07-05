@@ -152,6 +152,10 @@ div{
   border-radius: 5px;
 }
 
+.task:hover {
+  color: red; 
+}
+
 .tabla-casilleros{
   margin-top: 48px;
   margin-left: 1.5%;

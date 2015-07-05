@@ -66,7 +66,9 @@ router.get('/traer-eventos', function(req, res) {
 
 	  	var eventsOK = {};
 		eventsDB.forEach(function(cadaevento){
-			eventsOK[cadaevento.date] = cadaevento.summary;
+			(!(cadaevento.date in eventsOK) ?
+				eventsOK[cadaevento.date] = [cadaevento.summary] :
+				eventsOK[cadaevento.date].push(cadaevento.summary) );
 		});
 
 		res.contentType('application/json');
