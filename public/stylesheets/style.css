@@ -129,7 +129,7 @@ div{
   border-style: solid;
   border-width: thin;
   margin: 0px;
-
+  overflow: auto;
 }
 
 .dia-pasado{
@@ -150,6 +150,10 @@ div{
   border: #F88888 solid 1px; 
   padding: 1px;
   border-radius: 5px;
+}
+
+.task:hover {
+  color: red; 
 }
 
 .tabla-casilleros{
