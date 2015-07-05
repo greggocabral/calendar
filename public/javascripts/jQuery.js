@@ -18,10 +18,21 @@ $(document).ready(function() {
 			 		var month = moment().startOf('week').add(i,"days").format("MM");
 			 		var year = moment().startOf('week').add(i,"days").format("YYYY");
 			 		var fullDate = dia + '-' + month + '-' + year;
+
 			 		var mes = Number(moment().startOf('week').add(i,"days").format("M"));
 
-		 			if (dia == 01) {$("#semana"+s).append('<div id="'+ fullDate +'" class="'+ (mes % 2 == 0 ? "dia-mes-par " : "") + 'col-xs-2 casillero-dia"><h5>'+dia +" "+ moment().startOf('week').add(i,"days").format("MMMM").substring(0, 3) + moment().startOf('week').add(i,"days").format("YY")+'</h5></div>')}
-		 			else{$("#semana"+s).append('<div id="'+ fullDate +'" class="'+ (mes % 2 == 0 ? "dia-mes-par " : "") + 'col-xs-2 casillero-dia"><h5>'+dia+'</h5>' + (typeof(dataTest[fullDate])!="undefined" ? "<h5 class='task'>" + dataTest[fullDate] + "</h5>" : "") + '</div>');}
+			 		//fecha identificacion del casillero
+			 		var dia_id = "" + fullDate;
+			 		//clase para dar formato al casillero dia, cambiando en funcion de paridad de mes 
+			 		var dia_class = (mes % 2 == 0 ? "dia-mes-par " : "") +' col-xs-2 casillero-dia'; 
+			 		//texto a incorporar los dias 01 de cada mes. si no es 01, vale ""
+			 		var dia_texto_mes = (dia == 01 ? " " + moment().startOf('week').add(i,"days").format("MMMM").substring(0, 3) 
+		 												+ moment().startOf('week').add(i,"days").format("YY") : ""); 
+			 		//tasks del dia a incorporar. si no hay tasks vale ""
+			 		var dia_data = (typeof(dataTest[fullDate])!="undefined" ? "<h5 class='task'>" + dataTest[fullDate] + "</h5>" : "");
+		 			// append del casillero dia en cuestion
+		 			$("#semana"+s).append('<div id="'+ dia_id +'" class="'+ dia_class +'"> <h5>'+ dia +' ' + dia_texto_mes + dia_data + '</div>');
+		 		
 			}
 		}
 
