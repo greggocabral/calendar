@@ -19,8 +19,6 @@ var retrieveEvents = function(db, callback) {
   });
 }
 
-
-
 // Post Events
 var postEvents = function(db, eventoNuevo, callback) {
   // Get the events collection
@@ -31,6 +29,18 @@ var postEvents = function(db, eventoNuevo, callback) {
     callback(result);
   });
 }
+
+// Delete Events
+var deleteEvents = function(db, eventoViejo, callback) {
+  // Get the events collection
+  var collection = db.collection('events');
+  collection.remove(eventoViejo, function(err, result) {
+    assert.equal(err, null);
+    console.log("borrado el evento");
+    callback(result);
+  });
+}
+
 
 
 /* GET home page. */
@@ -86,6 +96,22 @@ router.post('/postear-eventos', function(req, res) {
 	  assert.equal(null, err);
 	  console.log("Connected correctly to server");
 	  postEvents(db, eventoPosteado, function (){
+		db.close();
+	  });
+
+	});
+
+});
+
+router.post('/borrar-eventos', function(req, res) {
+	console.log('llego pedido de borrado de cliente');
+	console.log(req.body);
+	var eventoaBorrar = req.body;
+
+	MongoClient.connect(url, function(err, db) {
+	  assert.equal(null, err);
+	  console.log("Connected correctly to server");
+	  deleteEvents(db, eventoaBorrar, function (){
 		db.close();
 	  });
 

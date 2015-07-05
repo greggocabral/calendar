@@ -236,7 +236,7 @@ cursor: pointer; cursor: hand;
 
 .highlighting-text:hover{
   color: gray;
-
+  cursor: pointer; 
 }
 
 
