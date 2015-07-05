@@ -7,11 +7,7 @@ $(document).ready(function() {
 		console.log(data);
 
 		dataTest = data;
-/*		dataTest = {
-			"03-07-2015": "coto",
-			"04-07-2015": "dia"
-		};
-*/
+
 		// RENDERIZAR CALENDARIO VACIO CADA VEZ QUE SE CARGA LA PAGINA (ESTATICO)
 		for (var s=1; s<52; s++){
 			var id = "semana"+s;
@@ -28,17 +24,9 @@ $(document).ready(function() {
 		 			else{$("#semana"+s).append('<div id="'+ fullDate +'" class="'+ (mes % 2 == 0 ? "dia-mes-par " : "") + 'col-xs-2 casillero-dia"><h5>'+dia+'</h5>' + (typeof(dataTest[fullDate])!="undefined" ? "<h5 class='task'>" + dataTest[fullDate] + "</h5>" : "") + '</div>');}
 			}
 		}
+
+		// $(" div[id^='02-'] > h5:first-child").append("año");
      
-/*        $( "#01-07-2015" ).click(function() {
-	  		var $fecha = $(this)[0].id;
-	  		fechadelevento = $fecha;
-	    	$('#fecha-dialogo-evento').html('<h3>Date: '+$fecha+'</h3>');
-	    	$('#dialogo-evento').css('visibility', 'visible');
-	    	$('.tabla-casilleros').css('opacity', '0.2');
-	    	$('.header').css('opacity', '0.2');
-	    	$('#texto-evento').focus();
-		});
-*/
 		generadordeventos(); 
                     
      });
@@ -50,6 +38,10 @@ $(document).ready(function() {
 	function generadordeventos(){
 
 		 var fechadelevento = "";
+
+		$(".highlighting-text").click(function() {
+			$(window).scrollTop(0);
+		});
 
 		$( ".casillero-dia" ).click(function() {
 	  		var $fecha = $(this)[0].id;
@@ -83,18 +75,25 @@ $(document).ready(function() {
 			$.post( "/postear-eventos", { date: fechadelevento, summary: tarea } );
 			$('#texto-evento').html('');
 			$("#"+fechadelevento).append('<h5 class="task">'+tarea+'</h5>');
+			borrar();
 		});
+
+		var borrar = function() {$(".task").click(function(e) {
+		// $('.task').on('click', function(e){
+			e.stopPropagation();
+			// eliminar de la DB
+			var $fecha = $(this).parent()[0].id;
+	  		fechadelevento = $fecha;
+	  		var $tarea = $(this)[0].innerHTML;
+	  		tareadelevento = $tarea;
+			$.post( "/borrar-eventos", { date: fechadelevento, summary: tareadelevento });
+			// eliminar de la vista
+			$(this).remove();
+		})};
+
+		borrar();
+
 	}	
-	
-
-	// PEDIR BASE DE DATOS EN JSON A SERVER CON HTTP GET
-	// MOSTRAR EN CALENDARIO LOS EVENTOS LEVANTADOS DE LA BASE DE DATOS
-
-
-
-	//DETECTAR CLICKS SOBRE CASILLEROS DIV DE DIA QUE VISUALICE UN MICROFORM 
-	//AL ACEPTAR USUARIO, HACE UN HTTP POST CON EL JSON DE LA DATA DEL EVENTO
- 
 
 });
 
