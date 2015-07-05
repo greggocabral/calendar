@@ -124,12 +124,17 @@ div{
 }
 
 .casillero-dia{
-height: 50px;
+  height: 50px;
   border-color:rgba(0, 0, 0, 0.15);
   border-style: solid;
   border-width: thin;
   margin: 0px;
   overflow: auto;
+}
+
+.dia-pasado{
+  background-color:gray;
+
 }
 
 .dia-mes-par {
@@ -217,9 +222,6 @@ height: 50px;
   vertical-align: center;
   margin-left: 2%;
   margin-right:2%;
-
-
-
 }
 
 #cerrar-dialogo-evento:hover{
