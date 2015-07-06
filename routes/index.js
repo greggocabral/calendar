@@ -7,14 +7,12 @@ var fs = require('fs');
 // Connection URL
 var url = 'mongodb://localhost:27017/contcal';
 // Retrieve Events
-var retrieveEvents = function(db, callback) {
+var retrieveEvents = function(db, userid, callback) {
   // Get the events collection
+  console.log('getting data from '+userid);
   var collection = db.collection('events');
-  collection.find({}).toArray(function(err, docs) {
+  collection.find({userID: userid}).toArray(function(err, docs) {
     assert.equal(err, null);
-    console.log("Found the following records");
-    console.dir(JSON.stringify(docs));
-    // console.dir(JSON.stringify(docs[0]));
 	callback(docs);
   });
 }
@@ -49,20 +47,15 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/traer-eventos', function(req, res) {
-  	console.log('llego pedido de cliente');
-
-  	// devolver info al front 
-  	// leer y enviar events.json
-  	// falta coordinar los formatos de envío y recepción para que 
-  	//   sea práctico insertar los eventos en los respectivos casillero-dia
-  	// supongo que 
+router.get('/traer-eventos?*', function(req, res) {
+	userid = req.param("userID");
+  	console.log('llego pedido de cliente ' + userid);
   	// próximo paso: filtrar los eventos para cierto user
 
 	MongoClient.connect(url, function(err, db) {
 	  assert.equal(null, err);
 	  console.log("Connected correctly to server");
-	  retrieveEvents(db, function (eventsDB){
+	  retrieveEvents(db, userid, function (eventsDB){
 
 	  	var eventsOK = {};
 		eventsDB.forEach(function(cadaevento){
@@ -79,14 +72,6 @@ router.get('/traer-eventos', function(req, res) {
 	  });
 
 	});
-
-/*		dataTest = {
-			"03-07-2015": "ir al super",
-			"04-07-2015": "futbol",
-			"10-07-2015": "lavar ropa"
-		};*/
-		/*res.contentType('application/json');
-		res.end(JSON.stringify(dataTest));*/
 });
 
 router.post('/postear-eventos', function(req, res) {

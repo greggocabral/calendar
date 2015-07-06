@@ -30,9 +30,18 @@
 <body>
     <header id="top-of-page" class="header">
         <div> 
-            <div class="brand">
-                <h3>Continuous Calendar</h3>
+            <div id="brand-logo">
+                Continuous Calendar
             </div>
+
+            <div id="user-header-label">
+                <h4>User:</h4>
+            </div>
+
+            <div id="user-header">
+                
+            </div>
+
             <div id="back-to-present">
                 <h3 class="highlighting-text">Back to the present</h3>
             </div>
@@ -72,21 +81,62 @@
             <!-- todo se genera aca adentro     -->
     </div>
     
-    <div id='dialogo-evento'>
-        <div id='fecha-dialogo-evento'>
+    <div id='dialogo-evento' class='dialogo'>
+        <div class="row">
+            <div id='titulo-dialogo-evento' class='titulo-dialogo'>
+                <h2>Create new event</h2>
+            </div>    
+            <div class="break"></div>         
+        </div>
+        <div class="row">
+            <div id='fecha-dialogo-evento'>
             
-        </div>
-
-            <div id="texto-evento" contentEditable="true" >
-                
             </div>
+            <div class="break"></div>         
+        </div>
+        <div class="row">
+            <div id="texto-evento" class=''>
+                <h3>Event title: </h3>
+            </div>
+            <div class="break"></div> 
+        </div>
+        <div class="row">
+            <div id="texto-evento-editable" contentEditable="true" >
+                
+            </div>       
+        </div>
+        <div class="row">
+            <div id='cerrar-dialogo-evento' class='cerrar-dialogo'>
+                <h5>Cerrar</h5>
+            </div>
+            <div id='submit-dialogo-evento' class='submit-dialogo'>
+                <h5>Submit</h5>
+            </div>
+        </div>  
+    </div>
 
-        <div id='cerrar-dialogo-evento'>
-            <h5>Cerrar</h5>
+    <div id='dialogo-login' class='dialogo'>
+        <div class="row">
+            <div id='titulo-dialogo-login' class='titulo-dialogo'>
+                <h2>Access calendar</h2>
+            </div>    
+            <div class="break"></div>         
         </div>
-        <div id='submit-dialogo-evento'>
-            <h5>Submit</h5>
+        <div class="row">
+            <div id="texto-user-login" class=''>
+                <h3>User: </h3>
+            </div>
+            <div class="break"></div> 
         </div>
+        <div class="row">
+            <div id="texto-user-login-editable" contentEditable="true" class=''>
+            </div>         
+        </div>
+        <div class="row">
+            <div id='submit-dialogo-login' class='submit-dialogo'>
+                <h5>Submit</h5>  
+            </div>
+        </div>    
     </div>
 
 
