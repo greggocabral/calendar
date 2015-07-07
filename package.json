@@ -14,5 +14,18 @@
     "morgan": "~1.5.3",
     "serve-favicon": "~2.2.1",
     "mongodb": "^2.0.35"
-  }
+  },
+  "description": "EN ESTE COMMIT m�ltiples eventos en cada d�a scrollbars cuando hace falta hover en los .task back to the present",
+  "main": "bin/www",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greggocabral/continuos-calendar.git"
+  },
+  "author": "grego pablo lucas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/greggocabral/continuos-calendar/issues"
+  },
+  "homepage": "https://github.com/greggocabral/continuos-calendar"
 }
