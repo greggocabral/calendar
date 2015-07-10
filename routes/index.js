@@ -5,7 +5,7 @@ var assert = require('assert');
 var fs = require('fs');
 
 // Connection URL
-var url = (process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost:27017/') + 'contcal';
+var url = (process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost:27017/') + 'plansandbreakfast';
 
 // Check for userid 
 var checkUser = function(db, userid, callback) {
