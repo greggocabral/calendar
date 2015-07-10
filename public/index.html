@@ -30,20 +30,21 @@
 <body>
     <header id="top-of-page" class="header">
         <div> 
-            <div id="brand-logo">
-                Continuous Calendar
+
+            <div id="brand-logo" class="logo-header">
+                Plans &amp Breakfast
             </div>
 
-            <div id="user-header-label">
-                <h4>User:</h4>
+            <div id="user-header-label" class="logo-header">
+                User:
             </div>
 
-            <div id="user-header">
+            <div id="user-header" class="logo-header">
                 
             </div>
 
             <div id="back-to-present">
-                <h3 class="highlighting-text">Back to the present</h3>
+                <div class="highlighting-text logo-header">Back to the present</div>
             </div>
             <div class="break">
             
@@ -52,6 +53,10 @@
         
         <div class="nombre-dias">
                     <div class="row">
+                        <div class="col-n-semana casillero-nombre-dia"> 
+
+                        </div>
+
                         <div class="col-xs-2 casillero-nombre-dia">
                             <h5> Monday</h5> 
                         </div>
@@ -80,64 +85,112 @@
     <div class="tabla-casilleros">
             <!-- todo se genera aca adentro     -->
     </div>
-    
-    <div id='dialogo-evento' class='dialogo'>
-        <div class="row">
-            <div id='titulo-dialogo-evento' class='titulo-dialogo'>
-                <h2>Create new event</h2>
+
+    <!--                            DIALOGO LOGIN                            -->
+
+    <div id='dialogo-login' class='dialogo'>
+        <div class="row-dialogo">
+            <div id='titulo-dialogo-login' class=''>
+                <div class="logo">Plans &amp Breakfast</div>
             </div>    
             <div class="break"></div>         
         </div>
-        <div class="row">
-            <div id='fecha-dialogo-evento'>
-            
-            </div>
+        <div class="row-dialogo">
+            <div id='descripcion-dialogo-login' class=''>
+                Access the continuous calendar
+            </div>    
             <div class="break"></div>         
         </div>
-        <div class="row">
-            <div id="texto-evento" class=''>
-                <h3>Event title: </h3>
-            </div>
-            <div class="break"></div> 
+        <div class="row-dialogo">
+            <input id="texto-input-user-login" type="text" placeholder="USER" class='input'>
         </div>
-        <div class="row">
-            <div id="texto-evento-editable" contentEditable="true" >
-                
-            </div>       
+        <div class="row-dialogo">
+            <input id="password-input-user-login" type="password" placeholder="PASSWORD" class='input'>
         </div>
-        <div class="row">
-            <div id='cerrar-dialogo-evento' class='cerrar-dialogo'>
-                <h5>Cerrar</h5>
+        <div class="row-dialogo">
+            <div id='boton-submit-dialogo-login' class='boton'>
+                <h5>Submit</h5>  
             </div>
-            <div id='submit-dialogo-evento' class='submit-dialogo'>
+            <div id='boton-new-user-dialogo-login' class='boton'>
+                <h5>New user</h5>  
+            </div>
+        </div>    
+    </div>
+
+    <!--                            DIALOGO NEW USER                            -->
+
+    <div id='dialogo-new-user' class='dialogo'>
+        <div class="row-dialogo">
+            <div id='titulo-dialogo-new-user' class='titulo-dialogo'>
+                Create new user
+            </div>    
+            <div class="break"></div>         
+        </div>
+        <div class="row-dialogo">
+            <input id="texto-input-new-user" type="text" placeholder="NEW USER" class='input'>
+        </div>
+        <div class="row-dialogo">
+             <input id="password-input-new-user" type="password" placeholder="NEW PASSWORD" class='input'>
+        </div>
+        <div class="row-dialogo">
+           <input id="password-repeat-new-user" type="password" placeholder="REPEAT NEW PASSWORD" class='input'> 
+        </div>
+        <div class="row-dialogo">
+            <div id='boton-submit-dialogo-new-user' class='boton'>
+                <h5>Submit</h5>  
+            </div>
+             <div id='boton-cerrar-dialogo-new-user' class='boton'>
+                <h5>Cancel</h5>
+            </div>
+        </div>    
+    </div>
+
+    <!--                            DIALOGO CREAR EVENTO                           -->
+
+    
+    <div id='dialogo-evento' class='dialogo'>
+        <div class="row-dialogo">
+            <div id='titulo-dialogo-evento' class='titulo-dialogo'>
+                Create new event
+            </div>    
+            <div class="break"></div>         
+        </div>
+        <div class="row-dialogo">
+            <div id='fecha-dialogo-evento' class='texto-dialogo-evento'>
+            
+            </div>        
+        </div>
+        <div class="row-dialogo">
+            <input id="texto-input-evento" type="text" placeholder="EVENT NAME" class='input'>
+        </div>
+        <div class="row-dialogo">
+            <div id='boton-submit-dialogo-evento' class='boton'>
                 <h5>Submit</h5>
+            </div>
+            <div id='boton-cerrar-dialogo-evento' class='boton'>
+                <h5>Cancel</h5>
             </div>
         </div>  
     </div>
 
-    <div id='dialogo-login' class='dialogo'>
-        <div class="row">
-            <div id='titulo-dialogo-login' class='titulo-dialogo'>
-                <h2>Access calendar</h2>
+    <!--                            MENSAJE                          -->
+
+    
+    <div id='dialogo-mensaje' class='dialogo'>
+        <div class="row-dialogo">
+            <div id='titulo-dialogo-mensaje' class='titulo-dialogo'>
+                <h2>Create new event</h2>
             </div>    
             <div class="break"></div>         
         </div>
-        <div class="row">
-            <div id="texto-user-login" class=''>
-                <h3>User: </h3>
+        <div class="row-dialogo">
+            <div id='boton-ok-dialogo-mensaje' class='boton'>
+                <h5>ok</h5>
             </div>
-            <div class="break"></div> 
-        </div>
-        <div class="row">
-            <div id="texto-user-login-editable" contentEditable="true" class=''>
-            </div>         
-        </div>
-        <div class="row">
-            <div id='submit-dialogo-login' class='submit-dialogo'>
-                <h5>Submit</h5>  
-            </div>
-        </div>    
+        </div>  
     </div>
+
+    
 
 
 </body>

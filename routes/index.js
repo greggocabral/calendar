@@ -6,6 +6,33 @@ var fs = require('fs');
 
 // Connection URL
 var url = (process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost:27017/') + 'plansandbreakfast';
+
+// Check for userid 
+var checkUser = function(db, userid, callback) {
+	var collection = db.collection('users');
+	collection.find({userID: userid}).toArray(function(err, docs) {
+  		assert.equal(err, null);
+  		callback(docs);
+  	});
+}
+
+var validateUser = function(db, userid, pass, callback) {
+	var collection = db.collection('users');
+	collection.find({userID: userid, password: pass}).toArray(function(err, docs) {
+  		assert.equal(err, null);
+  		callback(docs);
+  	});
+}
+
+var createUser = function(db, user, callback) {
+  // Get the events collection
+  var collection = db.collection('users');
+  collection.insert([user], function(err, result) {
+  	assert.equal(err, null);
+  	callback(result);
+  });
+}
+
 // Retrieve Events
 var retrieveEvents = function(db, userid, callback) {
   // Get the events collection
@@ -39,20 +66,63 @@ var deleteEvents = function(db, eventoViejo, callback) {
   });
 }
 
+// CONEXION CON LA MONGO DB
 MongoClient.connect(url, function(err, db){
+	assert.equal(null, err);
+	console.log("Connected correctly to db server");
+	// UNA VEZ CONECTADO EMPIEZO A ESCUCHAR LO QUE PIDE EL CLIENTE QUE HAGA CON LA DB
+  
+  	// LOGIN
+
 	router.get('/', function(req, res, next) {
 		res.render('index', { title: 'Putazo' });
 	});
 
-	/* GET home page. */
+	// CREAR NUEVO USUARIO
+	router.post('/create-user', function(req, res) {
+		user = req.body;
+		console.log('llego pedido de crear usuario ' + user.userID);
+		console.log('contrasena ' + user.password);
+  		assert.equal(null, err);
+
+  		// try to load user data
+  		checkUser(db, user.userID, function (usersDB){
+  			if (usersDB.length != 0){
+  				res.end('notOk');
+  			}
+  			else
+  			{
+  				console.log('intentando crear usuario');
+  				createUser(db, user, function (usersDB){
+  					res.end('ok');
+  				});
+  			}
+  		});
+  		
+	});
+
+	// VALIDAR USUARIO
+	router.get('/validate-user?*', function(req, res) {
+		userid = req.param("userID");
+		pass = req.param("password");
+  
+  		validateUser(db, userid, pass, function (usersDB){
+  			if (usersDB.length != 0){
+  				res.end('ok');
+  			}
+  			else
+  			{
+  				res.end('notOk');
+  			}
+  		});
+	});
+
+	// CARGAR EVENTOS DE USUARIO LOGUEADO
 	router.get('/traer-eventos?*', function(req, res) {
 		userid = req.param("userID");
 		console.log('llego pedido de cliente ' + userid);
-  	// próximo paso: filtrar los eventos para cierto user
-
-  	// MongoClient.connect(url, function(err, db) {
   		assert.equal(null, err);
-  		console.log("Connected correctly to server");
+  		
   		retrieveEvents(db, userid, function (eventsDB){
 
   			var eventsOK = {};
@@ -64,27 +134,15 @@ MongoClient.connect(url, function(err, db){
 
   			res.contentType('application/json');
   			res.end(JSON.stringify(eventsOK));
-
-
-
   		});
+	});
 
-  	// });
-});
-
+	// AGREGAR EVENTOS A LA BASE DE DATOS
 	router.post('/postear-eventos', function(req, res) {
-		console.log('llego envío de cliente');
-		console.log(req.body);
 		var eventoPosteado = req.body;
+		postEvents(db, eventoPosteado, function (){});
 
-		MongoClient.connect(url, function(err, db) {
-			assert.equal(null, err);
-			console.log("Connected correctly to server");
-			postEvents(db, eventoPosteado, function (){
-				db.close();
-			});
 
-		});
 
 	});
 
@@ -92,23 +150,11 @@ MongoClient.connect(url, function(err, db){
 		console.log('llego pedido de borrado de cliente');
 		console.log(req.body);
 		var eventoaBorrar = req.body;
-
-		MongoClient.connect(url, function(err, db) {
-			assert.equal(null, err);
-			console.log("Connected correctly to server");
-			deleteEvents(db, eventoaBorrar, function (){
-				db.close();
-			});
-
-		});
-
+		deleteEvents(db, eventoaBorrar, function (){});
 	});
 	
 
-
-
 })
-
 
 
 /* GET home page. */
