@@ -5,7 +5,7 @@ var assert = require('assert');
 var fs = require('fs');
 
 // Connection URL
-var url = (process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost:27017/') + 'contcal';
+var url = (process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost:27017/') + 'plansandbreakfast';
 // Retrieve Events
 var retrieveEvents = function(db, userid, callback) {
   // Get the events collection
