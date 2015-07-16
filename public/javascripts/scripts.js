@@ -21,6 +21,9 @@ function showLogin(){
 			showCreateNewUser();
 	});
 
+	$("#dialogo-login").keyup(function(e) {
+		if (e.which == 13) $("#boton-submit-dialogo-login").click();     // enter
+	});
 
 }
 
@@ -61,6 +64,11 @@ function showCreateNewUser(){
 
 	$( "#boton-cerrar-dialogo-new-user" ).click(function() {
 	    	showLogin();
+	});
+
+	$("#dialogo-new-user").keyup(function(e) {
+		if (e.which == 13) $("#boton-submit-dialogo-new-user").click();     // enter
+		if (e.which == 27) $("#boton-cerrar-dialogo-new-user").click();   // esc
 	});
 }
 
@@ -129,6 +137,11 @@ function showMessage(message, functionOK){
 		functionOK();
 	});
 
+	$("#dialogo-mensaje").keyup(function(e) {
+		if (e.which == 13) $("#boton-ok-dialogo-mensaje").click();     // enter
+		if (e.which == 27) $("#boton-ok-dialogo-mensaje").click();   // esc
+	});
+
 }
 
 function showCreateNewEvent(){
@@ -161,6 +174,11 @@ function showCreateNewEvent(){
 		else {
 			showMessage("Enter an event title contains only letters, numerbes, spaces, '-', '.' and ':'", showCreateNewEvent);
 		}
+	});
+
+	$("#dialogo-evento").keyup(function(e) {
+		// if (e.which == 13) $("#boton-submit-dialogo-evento").click();     // enter
+		if (e.which == 27) $("#boton-cerrar-dialogo-evento").click();   // esc
 	});
 	
 }

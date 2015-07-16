@@ -483,9 +483,7 @@ div{
 .highlighting-text:hover{
   color: black;
   cursor: pointer; 
-  /*border-width: 3px;*/
-  /*background-color: yellow;*/
-  /*border-color: black;*/
+  outline-color: gray;
 
 }
 
