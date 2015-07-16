@@ -13,8 +13,8 @@ html {
 
 header{
   display: block;
-  color: white;
-  background-color: #333;
+  color: black;
+  background-color: white;
   top: 0px;
   position: fixed;
   z-index: 100;
@@ -31,7 +31,7 @@ body {
   line-height: 1.42857143;
   color: #333;
 
-  background-color: #333;
+  background-color: white;
 
 }
 
@@ -99,33 +99,70 @@ div{
 }
 
 #brand-logo{
-  margin-left: 1%;
+  margin-left: 2%;
   float: left;
-}
-
-.logo{
-  font-family: jd;
-  font-size: 40px;
-}
-
-.logo-header{
-  font-family: jd;
   font-size: 25px;
 }
 
+.list{
+  border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+  width: 100px;]
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin-bottom: 5px;
+  outline-color: gray;
+
+}
+
+.list-tem{
+  
+}
+
+
+
+.logo{
+  /*font-family: jd;*/
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: bold;
+}
+
+.logo-header{
+  font-family: Montserrat, "Helvetica Neue";
+  font-size: 15px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
 #user-header-label{
-  margin-left: 10%;
-  float: left;
+  margin-right: 0.25%;
+  float: right;
+  margin-top: 7px;
 }
 
 #user-header{
-  margin-left: .25%;
-  float: left;
+  margin-right: 2%;
+  float: right;
+}
+
+#calendar-header-label{
+  margin-right: 0.25%;
+  float: right;
+  margin-top: 7px;
+}
+
+#calendar-header{
+  margin-right: 2%;
+  float: right;
 }
 
 #back-to-present{
-  margin-right: 2%;
+  /*text-transform: uppercase;*/
+  margin-right: 1%;
   float: right;
+  margin-top: 1px;
+  font-size: 20px;
 
 }
 
@@ -188,19 +225,19 @@ div{
   min-height: 25px;
   text-align: center;
   max-height: 30px;
-  border-color: #333;
-  border-style: solid;
-  border-width: thin;
   margin-bottom: 2px;
-  background-color: #333;
-  color: white;
-  border-top-width: 2px;
+  background-color: white;
+  color: black;
+  border-width: 1px;
   border-bottom-width: 2px;
+  border-top-width: 2px;
   padding: 0px;
+  border-style: solid;
+  text-transform: uppercase;
 }
 
 .casillero-dia{
-  height: 50px;
+  height: 60px;
   border-color: #333;
   border-style: solid;
   border-width: thin;
@@ -212,13 +249,10 @@ div{
 
 .casillero-semana{
   height: 50px;
-  border-color: #333;
-  border-style: solid;
-  border-width: thin;
   margin: 0px;
   overflow: auto;
-  background-color: #333;
-  color: white;
+  background-color: white;
+  color: black;
   padding-left: 2px;
   padding-right: 2px;
   padding-top: 15px;
@@ -226,7 +260,7 @@ div{
 }
 
 .dia-pasado{
-  background-color:rgba(84, 84, 84, 1);
+  /*background-color:rgba(84, 84, 84, 1);*/
 }
 
 .dia-hoy{
@@ -235,7 +269,8 @@ div{
 }
 
 .dia-mes-par {
-  background-color:rgba(211, 211, 211, 1);
+  /*background-color:rgba(211, 211, 211, 1);*/
+  background-color: white;
 }
 
 .casillero-dia:hover {
@@ -251,6 +286,7 @@ div{
   padding-left: 3px;
   border-radius: 5px;
   float: left;
+  display: inline;
 }
 
 
@@ -258,7 +294,7 @@ div{
 .tabla-casilleros{
   margin-top: 60px;
   margin-left: 1.5%;
-  background-color: #333;
+  background-color: white;
 }
 
 
@@ -285,6 +321,11 @@ div{
   border-radius:5px;
 }
 
+.cross{
+  color: white;
+  display: inline;
+}
+
 
 .text-input{
   border-color:black;
@@ -309,19 +350,24 @@ div{
 
 .titulo-dialogo{
   font-size: 18px;
-
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  text-align: center;
 }
 
 #dialogo-login{
   visibility: visible;
   left: 50%;
   margin-left: -130px;
+  top: 20%;
 }
 
 #dialogo-new-user{
   visibility: hidden;
   left: 50%;
   margin-left: -130px;
+  top: 20%;
 }
 
 #dialogo-evento{
@@ -334,6 +380,16 @@ div{
   visibility: hidden;
   left: 50%;
   margin-left: -130px;
+  top: 20%;
+  z-index: 1200;
+}
+
+#dialogo-select-calendar{
+  visibility: hidden;
+  left: 50%;
+  margin-left: -130px;
+  top: 20%;
+
 }
 
 #boton-cerrar-dialogo-evento,
@@ -342,20 +398,18 @@ div{
 #boton-new-user-dialogo-login,
 #boton-submit-dialogo-new-user,
 #boton-cerrar-dialogo-new-user,
-#boton-ok-dialogo-mensaje{
+#boton-ok-dialogo-mensaje,
+#boton-submit-select-calendar,
+#boton-cerrar-select-calendar,
+#boton-add-calendar{
   position: relative;
   margin-left: auto;
   margin-right: auto;
 }
 
 
-#titulo-dialogo-evento,
-#titulo-dialogo-new-user,
 #titulo-dialogo-login{
-  margin-left: auto;
-  margin-right: auto;
-  width: 200px;
-  text-align: center;
+  font-size: 40px;
 }
 
 #descripcion-dialogo-login{
@@ -378,6 +432,11 @@ div{
   text-align: center;
 }
 
+#name-new-calendar{
+  width: 105px;
+
+}
+
 #texto-input-evento,
 #texto-input-user-login,
 #password-input-user-login{
@@ -387,7 +446,8 @@ div{
 
 
 #boton-cerrar-dialogo-evento:hover,
-#boton-cerrar-dialogo-new-user:hover{
+#boton-cerrar-dialogo-new-user:hover,
+#boton-cerrar-select-calendar:hover{
   background-color:red;
   cursor: pointer; 
 }
@@ -395,19 +455,38 @@ div{
 #boton-submit-dialogo-login:hover,
 #boton-submit-dialogo-evento:hover,
 #boton-submit-dialogo-new-user:hover,
-#boton-ok-dialogo-mensaje:hover{
+#boton-ok-dialogo-mensaje:hover,
+#boton-submit-select-calendar:hover{
   background-color: rgb(16, 157, 0);
   cursor: pointer; 
 }
 
-#boton-new-user-dialogo-login:hover{
+#boton-new-user-dialogo-login:hover,
+#boton-add-calendar:hover{
   background-color: yellow;
   cursor: pointer; 
 }
 
+.highlighting-text{
+  border-style: solid;
+  border-width: 2px;
+  padding-right: 2px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-left: 2px;
+  border-radius: 6px;
+  border-color: white;
+  font-weight: bold;
+  color: #333;
+}
+
 .highlighting-text:hover{
-  color: yellow;
+  color: black;
   cursor: pointer; 
+  /*border-width: 3px;*/
+  /*background-color: yellow;*/
+  /*border-color: black;*/
+
 }
 
 .task:hover {
@@ -419,7 +498,8 @@ div{
 #password-input-user-login:focus,
 #texto-input-new-user:focus,
 #password-input-new-user:focus,
-#password-repeat-new-user:focus{
-  outline-color: yellow;
+#password-repeat-new-user:focus,
+#name-new-calendar:focus{
+  outline-color: gray;
 }
 

@@ -31,21 +31,32 @@
     <header id="top-of-page" class="header">
         <div> 
 
-            <div id="brand-logo" class="logo-header">
+            <div id="brand-logo" class="logo">
                 Plans &amp Breakfast
+            </div>
+
+            <div >
+                <div id="back-to-present" class="highlighting-text logo-header">
+                    Back to the Present
+                </div>
+            </div>
+
+            <div id="calendar-header" class="logo-header highlighting-text">
+                
+            </div>
+
+            <div id="calendar-header-label" class="logo-header">
+                Calendar:
+            </div>
+
+            <div id="user-header" class="logo-header highlighting-text">
+                
             </div>
 
             <div id="user-header-label" class="logo-header">
                 User:
             </div>
-
-            <div id="user-header" class="logo-header">
-                
-            </div>
-
-            <div id="back-to-present">
-                <div class="highlighting-text logo-header">Back to the present</div>
-            </div>
+            
             <div class="break">
             
             </div>
@@ -53,7 +64,7 @@
         
         <div class="nombre-dias">
                     <div class="row">
-                        <div class="col-n-semana casillero-nombre-dia"> 
+                        <div class="col-n-semana casillero-nombre-dia" style="border-style: none"> 
 
                         </div>
 
@@ -90,7 +101,7 @@
 
     <div id='dialogo-login' class='dialogo'>
         <div class="row-dialogo">
-            <div id='titulo-dialogo-login' class=''>
+            <div id='titulo-dialogo-login' class='titulo-dialogo'>
                 <div class="logo">Plans &amp Breakfast</div>
             </div>    
             <div class="break"></div>         
@@ -161,7 +172,7 @@
             </div>        
         </div>
         <div class="row-dialogo">
-            <input id="texto-input-evento" type="text" placeholder="EVENT NAME" class='input'>
+            <input id="texto-input-evento" type="text" placeholder="EVENT TITLE" class='input'>
         </div>
         <div class="row-dialogo">
             <div id='boton-submit-dialogo-evento' class='boton'>
@@ -189,6 +200,45 @@
             </div>
         </div>  
     </div>
+
+    <!--                            SELECCIONAR CALENDARIO                         -->
+
+    <div id='dialogo-select-calendar' class='dialogo'>
+        <div class="row-dialogo">
+            <div id='titulo-dialogo-select-calendar' class='titulo-dialogo'>
+                Select calendar
+            </div>    
+            <div class="break"></div>         
+        </div>
+        <div class="row-dialogo">
+            <div class="col-xs-6">
+                <select id='calendar-list' size="5" class="list">
+                </select>
+                <div class="break"></div>
+            </div>
+            
+            <div class="col-xs-6">
+                <div class="row-dialogo">
+                     <input id="name-new-calendar" type="text" placeholder="NEW CALENDAR" class='input'>
+                </div>
+                <div id='boton-add-calendar' class='boton'>
+                    <h5>Add</h5>  
+                </div>
+            </div>
+            <div class="break"></div>
+            
+        </div>
+        
+        <div class="row-dialogo">
+            <div id='boton-submit-select-calendar' class='boton'>
+                <h5>Select</h5>  
+            </div>
+             <div id='boton-cerrar-select-calendar' class='boton'>
+                <h5>Cancel</h5>
+            </div>
+        </div>    
+    </div>
+    
 
     
 

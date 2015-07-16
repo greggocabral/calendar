@@ -33,15 +33,51 @@ var createUser = function(db, user, callback) {
   });
 }
 
-// Retrieve Events
-var retrieveEvents = function(db, userid, callback) {
+var checkCalendar = function(db, calendarid, callback) {
+  var collection = db.collection('calendars');
+  collection.find({calendarID: calendarid}).toArray(function(err, docs) {
+      assert.equal(err, null);
+      callback(docs);
+    });
+}
+
+var createCalendar = function(db, calendar, callback) {
   // Get the events collection
-  console.log('getting data from '+userid);
-  var collection = db.collection('events');
-  collection.find({userID: userid}).toArray(function(err, docs) {
-  	assert.equal(err, null);
-  	callback(docs);
+  var collection = db.collection('calendars');
+  collection.insert([calendar], function(err, result) {
+    assert.equal(err, null);
+    callback(result);
   });
+}
+
+// Retrieve Events
+var listCalendars = function(db, callback) {
+  // Get the events collection
+  var collection = db.collection('calendars');
+  collection.find().toArray(function(err, docs) {
+    assert.equal(err, null);
+    callback(docs);
+  });
+}
+
+// Retrieve Events
+var retrieveEvents = function(db, userid, calendarid, callback) {
+  // Get the events collection
+  console.log('getting calendar'+ calendarid +' for '+userid);
+  var collection = db.collection('events');
+  if (calendarid === 'Personal'){
+    collection.find({userID: userid, calendarID: calendarid}).toArray(function(err, docs) {
+      assert.equal(err, null);
+      callback(docs);
+    });
+  }
+  else {
+    collection.find({calendarID: calendarid}).toArray(function(err, docs) {
+      assert.equal(err, null);
+      callback(docs);
+    });
+  }
+  
 }
 
 // Post Events
@@ -50,7 +86,7 @@ var postEvents = function(db, eventoNuevo, callback) {
   var collection = db.collection('events');
   collection.insert([eventoNuevo], function(err, result) {
   	assert.equal(err, null);
-  	console.log("posteado el evento");
+  	console.log("posteado el evento "+ eventoNuevo.summary + " de " + eventoNuevo.userID+ " en " + eventoNuevo.calendarID);
   	callback(result);
   });
 }
@@ -59,11 +95,20 @@ var postEvents = function(db, eventoNuevo, callback) {
 var deleteEvents = function(db, eventoViejo, callback) {
   // Get the events collection
   var collection = db.collection('events');
-  collection.remove(eventoViejo, function(err, result) {
-  	assert.equal(err, null);
-  	console.log("borrado el evento");
-  	callback(result);
+  collection.find(eventoViejo).toArray(function(err, docs) {
+    assert.equal(err, null);
+    if (docs.length === 0){
+      callback('no borrado');
+    }
+    else{
+      collection.remove(eventoViejo, function(err, result) {
+        assert.equal(err, null);
+        callback('borrado');
+      });
+    }
   });
+
+  
 }
 
 // CONEXION CON LA MONGO DB
@@ -117,13 +162,12 @@ MongoClient.connect(url, function(err, db){
   		});
 	});
 
-	// CARGAR EVENTOS DE USUARIO LOGUEADO
+	// CARGAR EVENTOS DE USUARIO LOGUEADO 
 	router.get('/traer-eventos?*', function(req, res) {
 		userid = req.param("userID");
-		console.log('llego pedido de cliente ' + userid);
-  		assert.equal(null, err);
-  		
-  		retrieveEvents(db, userid, function (eventsDB){
+    calendarid = req.param("calendarID");
+
+  	retrieveEvents(db, userid, calendarid, function (eventsDB){
 
   			var eventsOK = {};
   			eventsDB.forEach(function(cadaevento){
@@ -137,20 +181,53 @@ MongoClient.connect(url, function(err, db){
   		});
 	});
 
+  // CREAR NUEVO CALENDARIO
+  router.post('/create-calendar', function(req, res) {
+    calendar = req.body;
+    console.log('llego pedido de crear calendar ' + calendar.calendarID);
+    console.log('usuario ' + calendar.userID);
+      
+      // try to load user data
+      checkCalendar(db, calendar.calendarID, function (calendarsDB){
+        if (calendarsDB.length != 0){
+          res.end('notOk');
+        }
+        else
+        {
+          console.log('intentando crear calendario');
+          createCalendar(db, calendar, function (calendarsDB){
+            res.end('ok');
+          });
+        }
+      });
+      
+  });
+
+  // CARGAR lista de CALENDARIOS 
+  router.get('/list-calendars', function(req, res) {
+    listCalendars(db, function (calendarsDB){
+        res.contentType('application/json');
+        res.end(JSON.stringify(calendarsDB));
+      });
+  });
+
 	// AGREGAR EVENTOS A LA BASE DE DATOS
 	router.post('/postear-eventos', function(req, res) {
 		var eventoPosteado = req.body;
 		postEvents(db, eventoPosteado, function (){});
-
-
+    res.end();
 
 	});
+
+  // BORRAR EVENTOS DE LA BASE DE DATOS
 
 	router.post('/borrar-eventos', function(req, res) {
 		console.log('llego pedido de borrado de cliente');
 		console.log(req.body);
 		var eventoaBorrar = req.body;
-		deleteEvents(db, eventoaBorrar, function (){});
+		deleteEvents(db, eventoaBorrar, function (borradoOK){
+      res.end(borradoOK);
+    });
 	});
 	
 
