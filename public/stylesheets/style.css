@@ -114,6 +114,7 @@ div{
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
   margin-bottom: 5px;
   outline-color: gray;
+  width: 170px;
 
 }
 
@@ -388,8 +389,9 @@ div{
 #dialogo-select-calendar{
   visibility: hidden;
   left: 50%;
-  margin-left: -130px;
+  margin-left: -200px;
   top: 20%;
+  width: 400px;
 
 }
 
@@ -440,7 +442,7 @@ div{
 }
 
 #name-new-calendar{
-  width: 105px;
+  width: 170px;
 
 }
 
