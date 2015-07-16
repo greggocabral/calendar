@@ -221,7 +221,6 @@ function showSelectCalendar(){
  	$("#boton-submit-select-calendar" ).unbind().click(function() {
     	var calendarid = $("#calendar-list").val();
     	var userid = $('#user-header').text();
-
     	
     	loadCalendar(userid, calendarid);
 	});
@@ -307,7 +306,7 @@ function createCalendar(calendarid, userid){
 function listCalendars(){
 	$.get("/list-calendars", function (data) {
 		calendars = data;
-		$('#calendar-list').html('<option value="Personal" class="list-item">Personal</option>');  
+		$('#calendar-list').html('<option value="Personal" class="list-item" selected="selected">Personal</option>');  
 
 		calendars.forEach(function(calendar){
 			$('#calendar-list').append('<option value="'+calendar.calendarID+'" class="list-item">'+calendar.calendarID+'</option>');   
