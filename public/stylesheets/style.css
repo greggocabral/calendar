@@ -1,0 +1,510 @@
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+  font-size: 10px;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+header{
+  display: block;
+  color: black;
+  background-color: white;
+  top: 0px;
+  position: fixed;
+  z-index: 100;
+  width: 100%;r
+}
+
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  /*font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;*/
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+
+  background-color: white;
+
+}
+
+h1 {
+  margin: .67em 0;
+  font-size: 2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /*text-transform: uppercase;*/
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 0px;
+
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    outline: 0;
+    text-decoration: none;
+}
+
+a {
+    color: black;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: black;
+}
+
+@font-face {
+    font-family: handwriting;
+    src: url(fonts/handwriting.ttf);
+    font-style: bold;
+}
+
+@font-face {
+    font-family: chalkboard;
+    src: url(fonts/chalkboard.ttf);
+    font-style: bold;
+}
+
+@font-face {
+    font-family: jd;
+    src: url(fonts/jd.ttf);
+    font-style: bold;
+}
+
+div{
+  display: block;
+}
+
+.break{
+  clear:both;
+}
+
+#brand-logo{
+  margin-left: 2%;
+  float: left;
+  font-size: 25px;
+}
+
+.list{
+  border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+  width: 100px;]
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin-bottom: 5px;
+  outline-color: gray;
+
+}
+
+.list-tem{
+  
+}
+
+
+
+.logo{
+  /*font-family: jd;*/
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: bold;
+}
+
+.logo-header{
+  font-family: Montserrat, "Helvetica Neue";
+  font-size: 15px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+#user-header-label{
+  margin-right: 0.25%;
+  float: right;
+  margin-top: 7px;
+}
+
+#user-header{
+  margin-right: 2%;
+  float: right;
+}
+
+#calendar-header-label{
+  margin-right: 0.25%;
+  float: right;
+  margin-top: 7px;
+}
+
+#calendar-header{
+  margin-right: 2%;
+  float: right;
+}
+
+#back-to-present{
+  /*text-transform: uppercase;*/
+  margin-right: 1%;
+  float: right;
+  margin-top: 1px;
+  font-size: 20px;
+
+}
+
+.nombre-dias{
+  margin-left: 1.5%;
+
+}
+
+.row {
+  margin-right: -10px;
+  margin-left: -10px;
+  width: 100%;
+}
+
+.row-dialogo {
+  width: 100%;
+  text-align: center;
+}
+
+.col-xs-2 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 14%;
+  float: left;
+}
+
+.col-n-semana {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  width: 2%;
+  max-width: 20px;
+  float: left;
+}
+
+.col-xs-4 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 33.33333%;
+  float: left;
+}
+
+.col-xs-6{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 50%;
+  float: left;
+}
+
+
+.casillero-nombre-dia{
+  min-height: 25px;
+  text-align: center;
+  max-height: 30px;
+  margin-bottom: 2px;
+  background-color: white;
+  color: black;
+  border-width: 1px;
+  border-bottom-width: 2px;
+  border-top-width: 2px;
+  padding: 0px;
+  border-style: solid;
+  text-transform: uppercase;
+}
+
+.casillero-dia{
+  height: 65px;
+  border-color: #333;
+  border-style: solid;
+  border-width: thin;
+  margin: 0px;
+  overflow: auto;
+  background-color: white;
+  padding: 2px;
+}
+
+.casillero-semana{
+  height: 50px;
+  margin: 0px;
+  overflow: auto;
+  background-color: white;
+  color: black;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 15px;
+  text-align: center;
+}
+
+.dia-pasado{
+  /*background-color:rgba(84, 84, 84, 1);*/
+}
+
+.dia-hoy{
+  border-width: thick;
+
+}
+
+.dia-mes-par {
+  /*background-color:rgba(211, 211, 211, 1);*/
+  background-color: white;
+}
+
+.casillero-dia:hover {
+  background-color: yellow;
+  cursor: pointer; 
+}
+
+.task {
+  background: inherit; 
+  border: #333 solid 2px; 
+  border-radius: 5px;
+  padding-right: 3px;
+  padding-left: 3px;
+  border-radius: 5px;
+  float: left;
+  display: inline;
+}
+
+
+
+.tabla-casilleros{
+  margin-top: 60px;
+  margin-left: 1.5%;
+  background-color: white;
+}
+
+
+.dialogo{
+  width: 260px;
+  z-index: 999;
+  position: fixed;
+  background-color: white;
+  border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+}
+
+.boton{
+  margin: 5px;
+  width: 80px;
+  text-align: center;
+  position: relative;
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+}
+
+.cross{
+  color: white;
+  display: inline;
+}
+
+
+.text-input{
+  border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+  width: 200px;
+  height: 30px;
+  overflow: auto;
+}
+
+.input{
+  border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius:5px;
+  width: 200px;
+  height: 30px;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin-bottom: 5px;
+}
+
+.titulo-dialogo{
+  font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  text-align: center;
+}
+
+#dialogo-login{
+  visibility: visible;
+  left: 50%;
+  margin-left: -130px;
+  top: 20%;
+}
+
+#dialogo-new-user{
+  visibility: hidden;
+  left: 50%;
+  margin-left: -130px;
+  top: 20%;
+}
+
+#dialogo-evento{
+  visibility: hidden;
+  right: 2%;
+  bottom: 2%;
+}
+
+#dialogo-mensaje{
+  visibility: hidden;
+  left: 50%;
+  margin-left: -130px;
+  top: 20%;
+  z-index: 1200;
+}
+
+#dialogo-select-calendar{
+  visibility: hidden;
+  left: 50%;
+  margin-left: -130px;
+  top: 20%;
+
+}
+
+#boton-cerrar-dialogo-evento,
+#boton-submit-dialogo-login,
+#boton-submit-dialogo-evento,
+#boton-new-user-dialogo-login,
+#boton-submit-dialogo-new-user,
+#boton-cerrar-dialogo-new-user,
+#boton-ok-dialogo-mensaje,
+#boton-submit-select-calendar,
+#boton-cerrar-select-calendar,
+#boton-add-calendar{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*para version en espanol*/
+#boton-submit-dialogo-evento,
+#boton-submit-dialogo-new-user,
+#boton-new-user-dialogo-login{
+  width: 100px;
+}
+
+#titulo-dialogo-login{
+  font-size: 40px;
+}
+
+#descripcion-dialogo-login{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+#texto-user-login{
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  text-align: center;
+}
+
+#password-user-login{
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  text-align: center;
+}
+
+#name-new-calendar{
+  width: 105px;
+
+}
+
+#texto-input-evento,
+#texto-input-user-login,
+#password-input-user-login{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#boton-cerrar-dialogo-evento:hover,
+#boton-cerrar-dialogo-new-user:hover,
+#boton-cerrar-select-calendar:hover{
+  background-color:red;
+  cursor: pointer; 
+}
+
+#boton-submit-dialogo-login:hover,
+#boton-submit-dialogo-evento:hover,
+#boton-submit-dialogo-new-user:hover,
+#boton-ok-dialogo-mensaje:hover,
+#boton-submit-select-calendar:hover{
+  background-color: rgb(16, 157, 0);
+  cursor: pointer; 
+}
+
+#boton-new-user-dialogo-login:hover,
+#boton-add-calendar:hover{
+  background-color: yellow;
+  cursor: pointer; 
+}
+
+.highlighting-text{
+  border-style: solid;
+  border-width: 2px;
+  padding-right: 2px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-left: 2px;
+  border-radius: 6px;
+  border-color: white;
+  font-weight: bold;
+  color: #333;
+}
+
+.highlighting-text:hover{
+  color: black;
+  cursor: pointer; 
+  outline-color: gray;
+
+}
+
+.task:hover {
+  background-color: red; 
+}
+
+#texto-input-evento:focus,
+#texto-input-user-login:focus,
+#password-input-user-login:focus,
+#texto-input-new-user:focus,
+#password-input-new-user:focus,
+#password-repeat-new-user:focus,
+#name-new-calendar:focus{
+  outline-color: gray;
+}
+
