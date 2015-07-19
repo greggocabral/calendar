@@ -103,6 +103,8 @@ div{
   margin-left: 2%;
   float: left;
   font-size: 25px;
+  clear:both;
+  width: 40%;
 }
 
 .list{
@@ -114,13 +116,10 @@ div{
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
   margin-bottom: 5px;
   outline-color: gray;
-  width: 170px;
+  width: 100%;
 
 }
 
-.list-tem{
-  
-}
 
 
 
@@ -137,41 +136,57 @@ div{
   font-weight: bold;
 }
 
+#user-header-pack-left{
+  float: right;
+  margin-right: 2%;
+  clear:right;
+}
+
 #user-header-label{
-  margin-left: 2%;
+  margin-left: 0px;
   float: left;
-  margin-top: 7px;
+  margin-top: 2px;
 }
 
 #user-header{
-  margin-right: 2%;
+  margin-left: 0px;
   float: left;
-  display: inline;
+  margin-top: 0px;
+  overflow-x: auto;
+  max-width: 70px;
+  max-height: 22px;
+  white-space: nowrap;
 }
 
-#user-header-pack{
 
-}
-#calendar-header-pack{
-  
+#calendar-header-pack-right{
+  float:right;
+  margin-right: 2%;
+  clear:right;
 }
 
 #calendar-header-label{
-  margin-right: 0.25%;
+  margin-left: 0px;
   float: left;
-  margin-top: 7px;
+  margin-top: 2px;
 }
 
 #calendar-header{
-  margin-right: 2%;
+  margin-left: 0px;
   float: left;
+  margin-top: 0px;
+  overflow-x: auto;
+  max-width: 70px;
+  max-height: 22px;
+  white-space: nowrap;
 }
 
 #back-to-present{
-  margin-right: 1%;
+  margin-right: 2%;
   float: right;
   margin-top: 1px;
-  font-size: 20px;
+  font-size: 15px;
+  clear:right;
 
 }
 
@@ -301,14 +316,17 @@ div{
 
 
 .tabla-casilleros{
-  margin-top: 60px;
+  margin-top: 105px;
   margin-left: 1.5%;
   background-color: white;
 }
 
 
 .dialogo{
-  width: 260px;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
   z-index: 999;
   position: fixed;
   background-color: white;
@@ -320,7 +338,8 @@ div{
 
 .boton{
   margin: 5px;
-  width: 80px;
+  width: 150px;
+  height: 40px;
   text-align: center;
   position: relative;
   background-color: white;
@@ -328,6 +347,8 @@ div{
   border-style: solid;
   border-width: 2px;
   border-radius:5px;
+  font-size: larger;
+  padding: 7px;
 }
 
 .cross{
@@ -361,15 +382,12 @@ div{
   font-size: 18px;
   margin-left: auto;
   margin-right: auto;
-  width: 200px;
   text-align: center;
+  font-size: x-large;
 }
 
 #dialogo-login{
   visibility: visible;
-  left: 50%;
-  margin-left: -130px;
-  top: 20%;
 }
 
 #dialogo-new-user{
@@ -387,20 +405,19 @@ div{
 
 #dialogo-mensaje{
   visibility: hidden;
-  left: 50%;
-  margin-left: -130px;
-  top: 20%;
   z-index: 1200;
 }
 
 #dialogo-select-calendar{
   visibility: hidden;
-  left: 50%;
-  margin-left: -200px;
-  top: 20%;
-  width: 400px;
 
 }
+
+#name-new-calendar,
+#boton-add-calendar{
+  width: 100%;
+}
+
 
 #boton-cerrar-dialogo-evento,
 #boton-submit-dialogo-login,
@@ -421,7 +438,7 @@ div{
 #boton-submit-dialogo-evento,
 #boton-submit-dialogo-new-user,
 #boton-new-user-dialogo-login{
-  width: 100px;
+  width: 200px;
 }
 
 #titulo-dialogo-login{
@@ -448,10 +465,6 @@ div{
   text-align: center;
 }
 
-#name-new-calendar{
-  width: 170px;
-
-}
 
 #texto-input-evento,
 #texto-input-user-login,

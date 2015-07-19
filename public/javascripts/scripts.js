@@ -321,12 +321,18 @@ function renderCalendar(events){
 	//borro todo lo que hay en tabla casilleros
 	$('.tabla-casilleros').html('');
 
+	var screenWidth = document.documentElement.clientWidth;
+	var smallScreen = (screenWidth < 750);
+
 	//inyecto semanas a la tabla y dias a las semanas
 	for (var s=0; s<52; s++){ 
 			var id = "semana"+s;
 			$('.tabla-casilleros').append('<div id="'+id+'" class="row"></div>');
 
 			$("#semana"+s).append('<div class="col-n-semana casillero-semana"> <h5>'+ s + '</h5></div>');
+
+			var monthName = (!smallScreen ? " " + moment().startOf('week').add(i,"days").format("MMMM").toUpperCase() : " " + moment().startOf('week').add(i,"days").format("MMM").toUpperCase());
+
 
 			for (var i=1+s*7; i<8+s*7; i++){
 			 		var dia = moment().startOf('week').add(i,"days").format("D");
@@ -342,7 +348,7 @@ function renderCalendar(events){
 			 		//clase para dar formato al casillero dia, cambiando en funcion de paridad de mes y si es un dia del pasado
 			 		var dia_class = (isDayToday? "dia-hoy " : (isDayInThePast? "dia-pasado ":(isDayEven? "dia-mes-par " : ""))) +' col-xs-2 casillero-dia'; 
 			 		//texto a incorporar los dias 01 de cada mes. si no es 01, vale ""
-			 		var dia_texto_mes = (dia == 01 ? " " + moment().startOf('week').add(i,"days").format("MMMM").toUpperCase() : ""); 
+			 		var dia_texto_mes = (dia == 01 ? monthName : ""); 
 			 		//tasks del dia a incorporar. si no hay tasks vale ""
 			 		var dia_data = "";
 			 		if (fullDate in events) { 
@@ -367,8 +373,8 @@ function renderCalendar(events){
 
 $(document).ready(function() {
 
-
-
+	
+    
 	showLogin();
 
 	

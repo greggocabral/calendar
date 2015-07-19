@@ -17,8 +17,21 @@
 
     <script src="javascripts/scripts.js"></script>
 
+    <!-- Google analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-65258935-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
     <!-- CSS -->
-    <link href="stylesheets/style.css" rel="stylesheet">
+    <link media="(min-width: 750px)" href="stylesheets/style.css" rel="stylesheet">
+    <link media="(max-width: 750px)" href="stylesheets/style-mobile.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="stylesheets/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -30,42 +43,36 @@
 <body>
 
     <header id="top-of-page" class="header">
-        <div> 
-
-            <div id="brand-logo" class="logo">
-                Plans &amp Breakfast
-            </div>
-
-            <div >
+        
+                <div id="brand-logo" class="logo">
+                    Plans &amp Breakfast
+                </div>
+                <div id="user-header-pack-left">
+                    <div id="user-header-label" class="logo-header">
+                        <!-- User: -->
+                        Usuario:
+                    </div>
+                    <div id="user-header" class="logo-header highlighting-text">
+                        
+                    </div>
+                </div>
+                <div id="calendar-header-pack-right">
+                    <div id="calendar-header-label" class="logo-header">
+                        <!-- Calendar: -->
+                        Calendario:
+                    </div>
+                    <div id="calendar-header" class="logo-header highlighting-text">
+                        
+                    </div>
+                 </div>
                 <div id="back-to-present" class="highlighting-text logo-header">
                     <!-- Back to the Present -->
                     Volver al Presente
                 </div>
-            </div>
 
-            <div id="calendar-header" class="logo-header highlighting-text">
+        <div class="break">
                 
-            </div>
-
-            <div id="calendar-header-label" class="logo-header">
-                <!-- Calendar: -->
-                Calendario:
-            </div>
-
-            <div id="user-header" class="logo-header highlighting-text">
-                
-            </div>
-
-            <div id="user-header-label" class="logo-header">
-                <!-- User: -->
-                Usuario:
-            </div>
-            
-            <div class="break">
-            
-            </div>
-        </div>
-        
+                </div>
         <div class="nombre-dias">
                     <div class="row">
                         <div class="col-n-semana casillero-nombre-dia" style="border-style: none"> 
@@ -73,25 +80,32 @@
                         </div>
 
                         <div class="col-xs-2 casillero-nombre-dia">
-                            <h5> Monday</h5> 
+                            <!-- <h5> Monday</h5>  -->
+                             <h5> Lun</h5> 
                         </div>
                         <div class="col-xs-2 casillero-nombre-dia">
-                            <h5> Tuesday</h5> 
+                            <!-- <h5> Tuesday</h5>  -->
+                             <h5> Mar</h5> 
                         </div>
                          <div class="col-xs-2 casillero-nombre-dia">
-                            <h5> Wednesday</h5> 
+                            <!-- <h5> Wednesday</h5>  -->
+                             <h5> Mie</h5> 
                         </div>
                          <div class="col-xs-2 casillero-nombre-dia">
-                            <h5> Thursday</h5> 
+                            <!-- <h5> Thursday</h5>  -->
+                             <h5> Jue</h5> 
                         </div>
                          <div class="col-xs-2 casillero-nombre-dia">
-                            <h5> Friday</h5> 
+                            <!-- <h5> Friday</h5>  -->
+                             <h5> Vie</h5> 
                         </div>
                         <div class="col-xs-2 casillero-nombre-dia">
-                            <h5> Saturday</h5> 
+                            <!-- <h5> Saturday</h5>   -->
+                             <h5> Sab</h5> 
                         </div>
                         <div class="col-xs-2 casillero-nombre-dia">
-                            <h5> Sunday</h5> 
+                            <!-- <h5> Sunday</h5>  -->
+                             <h5> Dom</h5> 
                         </div>
                     </div>
         </div>
