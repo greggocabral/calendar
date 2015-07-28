@@ -261,12 +261,12 @@ div{
 }
 
 .casillero-dia{
-  height: 65px;
+  height: 70px;
   border-color: #333;
   border-style: solid;
   border-width: thin;
   margin: 0px;
-  overflow: auto;
+  overflow: hidden;
   background-color: white;
   padding: 2px;
 }
@@ -295,6 +295,16 @@ div{
 .dia-mes-par {
   /*background-color:rgba(211, 211, 211, 1);*/
   background-color: white;
+}
+
+.first-week-day {
+  border-top-width: 3px;
+  border-top-style: dashed;
+}
+
+.first-day {
+  border-left-width: 3px;
+  border-left-style: dashed;
 }
 
 .casillero-dia:hover {
@@ -386,6 +396,10 @@ div{
   font-size: x-large;
 }
 
+#task-container{
+  margin-left: 2%;
+}
+
 #dialogo-login{
   visibility: visible;
 }
@@ -474,7 +488,7 @@ div{
 }
 
 
-#boton-cerrar-dialogo-evento:hover,
+/*#boton-cerrar-dialogo-evento:hover,
 #boton-cerrar-dialogo-new-user:hover,
 #boton-cerrar-select-calendar:hover{
   background-color:red;
@@ -494,7 +508,7 @@ div{
 #boton-add-calendar:hover{
   background-color: yellow;
   cursor: pointer; 
-}
+}*/
 
 .highlighting-text{
   border-style: solid;
@@ -509,16 +523,17 @@ div{
   color: #333;
 }
 
-.highlighting-text:hover{
+/*.highlighting-text:hover{
   color: black;
   cursor: pointer; 
   outline-color: gray;
 
 }
 
-.task:hover {
+#task-container > .task:hover {
   background-color: red; 
-}
+  cursor: pointer; 
+}*/
 
 #texto-input-evento:focus,
 #texto-input-user-login:focus,

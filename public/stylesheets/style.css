@@ -246,12 +246,12 @@ div{
 }
 
 .casillero-dia{
-  height: 65px;
+  height: 70px;
   border-color: #333;
   border-style: solid;
   border-width: thin;
   margin: 0px;
-  overflow: auto;
+  overflow: hidden;
   background-color: white;
   padding: 2px;
 }
@@ -280,6 +280,16 @@ div{
 .dia-mes-par {
   /*background-color:rgba(211, 211, 211, 1);*/
   background-color: white;
+}
+
+.first-week-day {
+  border-top-width: 3px;
+  border-top-style: dashed;
+}
+
+.first-day {
+  border-left-width: 3px;
+  border-left-style: dashed;
 }
 
 .casillero-dia:hover {
@@ -359,6 +369,7 @@ div{
 
 .titulo-dialogo{
   font-size: 18px;
+  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   width: 200px;
@@ -383,6 +394,10 @@ div{
   visibility: hidden;
   right: 2%;
   bottom: 2%;
+}
+
+#task-container{
+  margin-left: 2%;
 }
 
 #dialogo-mensaje{
@@ -503,8 +518,9 @@ div{
 
 }
 
-.task:hover {
+#task-container > .task:hover {
   background-color: red; 
+  cursor: pointer; 
 }
 
 #texto-input-evento:focus,

@@ -1,4 +1,4 @@
-
+var events;
 // FUNCIONES PARA SETEAR LOS ESTADOS GENERALES DE VISTA
 function showLogin(){
 
@@ -87,10 +87,11 @@ function showCalendar(){
 	$('.header').css('opacity', '1');
 
 
-	$( ".casillero-dia" ).click(function() {
+	$( ".casillero-dia" ).unbind().click(function() {
   		var fecha = $(this)[0].id;
+  		// var eventsCode = $(this)[0].innerHTML;
     	$('#fecha-dialogo-evento').html('<h3>'+fecha+'</h3>');
-    	showCreateNewEvent();
+    	showCreateNewEvent(fecha);
 	});
 
 	$('#user-header').unbind().click(function() {
@@ -102,25 +103,7 @@ function showCalendar(){
 	});
 
 	$(".task").unbind().click(function(e) {
-			e.stopPropagation();
-			// eliminar de la DB
-			var fecha = $(this).parent()[0].id;
-	  		var tarea = $(this)[0].innerHTML;
-	  		var userid = $('#user-header').text();
-	  		var calendarid = $('#calendar-header').text();
-	  		var taskDiv = $(this);
-			$.post( "/borrar-eventos", { date: fecha, summary: tarea, userID: userid, calendarID: calendarid}, function(borradoOk){
-				if (borradoOk == 'borrado'){
-					// showMessage("Event deleted", showCalendar);
-					showMessage("Evento '"+tarea+"' eliminado", showCalendar);
-					taskDiv.remove();
-				}
-				else {
-					// showMessage("You can only delete events that were created by yourself", showCalendar);
-					showMessage("Sólo podés eliminar los eventos que creaste vos", showCalendar);
-				}
-			});
-			// eliminar de la vista
+		
 	});
 
 	$("#back-to-present").unbind().click(function() {
@@ -151,7 +134,30 @@ function showMessage(message, functionOK){
 
 }
 
-function showCreateNewEvent(){
+function getTaskListHMTL(taskArray){
+	var taskListHTML = '';
+	taskArray.forEach(function(task){
+		taskListHTML = taskListHTML + '<h5 class="task">'+task+'</h5>';
+	})
+	return taskListHTML;
+
+}
+
+function showCreateNewEvent(date){
+
+	// obtain event list fot the selected date and format them for the container
+
+	var dayEvents = events[date];
+	var dayEventsHTML = '';
+	if (dayEvents != undefined){
+		dayEventsHTML = getTaskListHMTL(dayEvents);
+	} else
+	{
+		dayEvents = [];
+	}
+
+	
+
 	$('#dialogo-evento').css('visibility', 'visible');
 	$('#dialogo-evento').css('opacity', '1');
 	$('#dialogo-mensaje').css('visibility', 'hidden');
@@ -159,6 +165,7 @@ function showCreateNewEvent(){
 	$('.header').css('opacity', '0.2');
 	$('#texto-input-evento').val('');
 	$('#texto-input-evento').focus();
+	$('#task-container').html(dayEventsHTML);
 
 	$( "#boton-cerrar-dialogo-evento" ).unbind().click(function() {
     	showCalendar();
@@ -174,19 +181,54 @@ function showCreateNewEvent(){
 
 		if (validateText(tarea, 2)){
 			$.post( "/postear-eventos", {userID: userid, date: fecha, summary: tarea, calendarID: calendarid}, function () {
-				$("#"+fecha).append('<h5 class="task">'+tarea+'</h5>');
-				showCalendar();
+				$('#task-container').append('<h5 class="task">'+tarea+'</h5>');
+				dayEvents.push(tarea);
+				dayEventsHTML = getTaskListHMTL(dayEvents);
+				$("#"+fecha+ '> .data').html(dayEventsHTML);
+				$('#task-container').html(dayEventsHTML);
+				showCreateNewEvent(fecha);
 			});
 		}
 		else {
-			// showMessage("Enter an event title contains only letters, numbers, spaces, '-', '.' and ':'", showCreateNewEvent);
-			showMessage("Ingresá un título de evento que contenga sólo letras, numeros, espacios, '-', '.' y ':'", showCreateNewEvent);
+			showMessage("Ingresá un título de evento que contenga sólo letras, numeros, espacios, '-', '.' y ':'", function(){ return showCreateNewEvent(fecha); });
 		}
 	});
 
 	$("#dialogo-evento").keyup(function(e) {
 		// if (e.which == 13) $("#boton-submit-dialogo-evento").click();     // enter
 		if (e.which == 27) $("#boton-cerrar-dialogo-evento").click();   // esc
+	});
+
+	$("#task-container > .task").unbind().click(function(e) {
+			e.stopPropagation();
+			// eliminar de la DB
+			var fecha = $('#fecha-dialogo-evento').text();
+	  		var tarea = $(this)[0].innerHTML;
+	  		var userid = $('#user-header').text();
+	  		var calendarid = $('#calendar-header').text();
+	  		var taskDiv = $(this);
+			$.post( "/borrar-eventos", { date: fecha, summary: tarea, userID: userid, calendarID: calendarid}, function(borradoOk){
+				if (borradoOk == 'borrado'){
+					showMessage("Evento '"+tarea+"' eliminado", function(){ return showCreateNewEvent(fecha); });
+					taskDiv.remove();
+					eventos = $('#task-container').innerHTML;
+					console.log('fecha: #'+fecha);
+					$('#'+fecha).html(eventos);
+					// eliminar de la vista
+					var index = dayEvents.indexOf(tarea);
+					if (index > -1) {
+    					dayEvents.splice(index, 1);
+					}
+					dayEventsHTML = getTaskListHMTL(dayEvents);
+					$("#"+fecha+ '> .data').html(dayEventsHTML);
+				}
+				else {
+					// showMessage("You can only delete events that were created by yourself", showCalendar);
+					showMessage("Sólo podés eliminar los eventos que creaste vos", function(){ return showCreateNewEvent(fecha); });
+				}
+			});
+			
+
 	});
 	
 }
@@ -322,7 +364,8 @@ function renderCalendar(events){
 	$('.tabla-casilleros').html('');
 
 	var screenWidth = document.documentElement.clientWidth;
-	var smallScreen = (screenWidth < 750);
+
+	var monthNameFormat = (screenWidth > 750 ? "MMMM" : "MMM"); // to use short month name in mobile devices
 
 	//inyecto semanas a la tabla y dias a las semanas
 	for (var s=0; s<52; s++){ 
@@ -331,7 +374,7 @@ function renderCalendar(events){
 
 			$("#semana"+s).append('<div class="col-n-semana casillero-semana"> <h5>'+ s + '</h5></div>');
 
-			var monthName = (!smallScreen ? " " + moment().startOf('week').add(i,"days").format("MMMM").toUpperCase() : " " + moment().startOf('week').add(i,"days").format("MMM").toUpperCase());
+			
 
 
 			for (var i=1+s*7; i<8+s*7; i++){
@@ -341,14 +384,23 @@ function renderCalendar(events){
 
 			 		var isDayInThePast = moment().diff(moment().startOf('week').add(i,"days"), 'days')>0; 
 			 		var isDayToday =  (moment().format("DD-MM-YYYY") == fullDate);
-			 		var isDayEven = (mes % 2 == 0);
+			 		var isDayFirstWeek = (dia <= 7);
+
+			 		var monthName = " "+ moment().startOf('week').add(i,"days").format(monthNameFormat).toUpperCase();
+
 
 			 		//fecha identificacion del casillero
 			 		var dia_id = "" + fullDate;
 			 		//clase para dar formato al casillero dia, cambiando en funcion de paridad de mes y si es un dia del pasado
-			 		var dia_class = (isDayToday? "dia-hoy " : (isDayInThePast? "dia-pasado ":(isDayEven? "dia-mes-par " : ""))) +' col-xs-2 casillero-dia'; 
+			 		var dia_class = (isDayToday? "dia-hoy " : (isDayInThePast? "dia-pasado ":(isDayFirstWeek? "first-week-day " : ""))) +' col-xs-2 casillero-dia'; 
 			 		//texto a incorporar los dias 01 de cada mes. si no es 01, vale ""
-			 		var dia_texto_mes = (dia == 01 ? monthName : ""); 
+			 		if(dia == 01){
+			 			dia_texto_mes = monthName;
+			 			dia_class = dia_class + " first-day";
+			 		}
+			 		else{
+			 			dia_texto_mes = "";
+			 		}
 			 		//tasks del dia a incorporar. si no hay tasks vale ""
 			 		var dia_data = "";
 			 		if (fullDate in events) { 
@@ -358,7 +410,7 @@ function renderCalendar(events){
 			 			
 			 		};
 		 			// append del casillero dia en cuestion
-		 			$("#semana"+s).append('<div id="'+ dia_id +'" class="'+ dia_class +'"> <h5>'+ dia +' ' + dia_texto_mes + dia_data + '</h5></div>');
+		 			$("#semana"+s).append('<div id="'+ dia_id +'" class="'+ dia_class +'"> <h5>'+ dia +' ' + dia_texto_mes +'</h5><div class="data">'+ dia_data +'</div></div>');
 
 		 		
 			}
@@ -374,7 +426,7 @@ function renderCalendar(events){
 $(document).ready(function() {
 
 	
-    
+
 	showLogin();
 
 	
