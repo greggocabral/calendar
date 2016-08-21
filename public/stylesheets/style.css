@@ -175,6 +175,25 @@ div{
 
 }
 
+#keep-it-simple{
+  margin-right: 3%;
+  float: right;
+  margin-top: 1px;
+  font-size: 20px;
+
+  border-style: solid;
+  border-width: 2px;
+  padding-right: 2px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-left: 2px;
+  border-radius: 6px;
+  border-color: white;
+  font-weight: bold;
+  color: #333;
+
+}
+
 .nombre-dias{
   margin-left: 1.5%;
 
@@ -220,6 +239,24 @@ div{
   float: left;
 }
 
+.col-xs-4-titulo {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 80%;
+  float: left;
+}
+
+.col-xs-4-cross {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 5%;
+  float: left;
+}
+
 .col-xs-6{
   position: relative;
   min-height: 1px;
@@ -244,6 +281,23 @@ div{
   border-style: solid;
   text-transform: uppercase;
 }
+
+.dayNumber{
+    float: left;
+    margin-right: 5px;
+    /*right: 5px;*/
+    /*top: 0px;*/
+    /*font-size: 55px;*/
+}
+.monthName{
+    float: left;
+    /*right: 5px;*/
+    /*top: 0px;*/
+    /*font-size: 55px;*/
+    color: #D3D3D3;
+    clear: right;
+}
+
 
 .casillero-dia{
   height: 70px;
@@ -298,7 +352,7 @@ div{
 }
 
 .task {
-  background: inherit; 
+  background: #fff; 
   border: #333 solid 2px; 
   border-radius: 5px;
   padding-right: 3px;
@@ -306,6 +360,7 @@ div{
   border-radius: 5px;
   float: left;
   display: inline;
+  position: relative;
 }
 
 
@@ -341,8 +396,19 @@ div{
 }
 
 .cross{
+  padding: 0px;
+  width: 11px;
+  height: 11px;
+  right: -12px;
+  top: 5px;
+  text-align: center;
+  position: relative;
   color: white;
-  display: inline;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: black;
+  font-size: small;
 }
 
 
@@ -396,11 +462,13 @@ div{
   bottom: 2%;
 }
 
+
 #task-container{
   margin-left: 2%;
 }
 
-#dialogo-mensaje{
+#dialogo-mensaje,
+#dialogo-confirm{
   visibility: hidden;
   left: 50%;
   margin-left: -130px;
@@ -483,6 +551,12 @@ div{
   cursor: pointer; 
 }
 
+#cross-dialogo-evento:hover{
+  cursor: pointer;
+  color: red;
+  background-color: red;
+}
+
 #boton-submit-dialogo-login:hover,
 #boton-submit-dialogo-evento:hover,
 #boton-submit-dialogo-new-user:hover,
@@ -497,6 +571,8 @@ div{
   background-color: yellow;
   cursor: pointer; 
 }
+
+
 
 .highlighting-text{
   border-style: solid;

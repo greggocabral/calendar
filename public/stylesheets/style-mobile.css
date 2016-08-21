@@ -417,7 +417,8 @@ div{
   bottom: 2%;
 }
 
-#dialogo-mensaje{
+#dialogo-mensaje,
+#dialogo-confirm{
   visibility: hidden;
   z-index: 1200;
 }

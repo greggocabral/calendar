@@ -134,6 +134,31 @@ function showMessage(message, functionOK){
 
 }
 
+function showConfirm(message, functionOK, functionCancel){
+	$('#dialogo-new-user').css('opacity', '0.2');
+	$('#dialogo-login').css('opacity', '0.2');	
+	$('#dialogo-evento').css('opacity', '0.2');	
+	$('.tabla-casilleros').css('opacity', '0.2');
+	$('.header').css('opacity', '0.2');
+	$('#dialogo-select-calendar').css('opacity', '0.2');	
+	$('#dialogo-mensaje').css('opacity', '0.2');
+	$('#dialogo-confirm').css('visibility', 'visible');
+	$('#titulo-dialogo-confirm').html('<h5>'+message+'</h5>');
+	$( "#boton-ok-dialogo-confirm" ).click(function() {
+		functionOK();
+	});
+
+	$("#boton-cancel-dialogo-confirm" ).click(function() {
+		functionCancel();
+	});
+
+	$("#dialogo-mensaje").keyup(function(e) {
+		if (e.which == 13) $("#boton-ok-dialogo-confirm").click();     // enter
+		if (e.which == 27) $("#boton-cancel-dialogo-confirm").click();   // esc
+	});
+
+}
+
 function getTaskListHMTL(taskArray){
 	var taskListHTML = '';
 	taskArray.forEach(function(task){
@@ -168,6 +193,10 @@ function showCreateNewEvent(date){
 	$('#task-container').html(dayEventsHTML);
 
 	$( "#boton-cerrar-dialogo-evento" ).unbind().click(function() {
+    	showCalendar();
+	});
+
+	$( "#cross-dialogo-evento" ).unbind().click(function() {
     	showCalendar();
 	});
 
@@ -366,7 +395,7 @@ function renderCalendar(events){
 	var screenWidth = document.documentElement.clientWidth;
 
 	var monthNameFormat = (screenWidth > 750 ? "MMMM" : "MMM"); // to use short month name in mobile devices
-
+   
 	//inyecto semanas a la tabla y dias a las semanas
 	for (var s=0; s<52; s++){ 
 			var id = "semana"+s;
@@ -379,6 +408,7 @@ function renderCalendar(events){
 
 			for (var i=1+s*7; i<8+s*7; i++){
 			 		var dia = moment().startOf('week').add(i,"days").format("D");
+			 		var dayNumber = Number(dia);
 			 		var mes = Number(moment().startOf('week').add(i,"days").format("M"));
 			 		var fullDate = moment().startOf('week').add(i,"days").format("DD-MM-YYYY");
 
@@ -387,7 +417,8 @@ function renderCalendar(events){
 			 		var isDayFirstWeek = (dia <= 7);
 
 			 		var monthName = " "+ moment().startOf('week').add(i,"days").format(monthNameFormat).toUpperCase();
-
+			 		var monthNameLength = monthName.length;
+			 		
 
 			 		//fecha identificacion del casillero
 			 		var dia_id = "" + fullDate;
@@ -395,12 +426,14 @@ function renderCalendar(events){
 			 		var dia_class = (isDayToday? "dia-hoy " : (isDayInThePast? "dia-pasado ":(isDayFirstWeek? "first-week-day " : ""))) +' col-xs-2 casillero-dia'; 
 			 		//texto a incorporar los dias 01 de cada mes. si no es 01, vale ""
 			 		if(dia == 01){
-			 			dia_texto_mes = monthName;
 			 			dia_class = dia_class + " first-day";
 			 		}
 			 		else{
-			 			dia_texto_mes = "";
+			 			// dia_texto_mes = '';
+			 			// dia_texto_mes = monthName.substring(dayNumber%monthNameLength,dayNumber%monthNameLength+1);
 			 		}
+			 		dia_texto_mes = monthName;
+			 		// dia_texto_mes = monthName.substring(dayNumber%monthNameLength,dayNumber%monthNameLength+1);
 			 		//tasks del dia a incorporar. si no hay tasks vale ""
 			 		var dia_data = "";
 			 		if (fullDate in events) { 
@@ -410,7 +443,10 @@ function renderCalendar(events){
 			 			
 			 		};
 		 			// append del casillero dia en cuestion
-		 			$("#semana"+s).append('<div id="'+ dia_id +'" class="'+ dia_class +'"> <h5>'+ dia +' ' + dia_texto_mes +'</h5><div class="data">'+ dia_data +'</div></div>');
+		 			$("#semana"+s).append('<div id="'+ dia_id +'" class="'+ dia_class +'"> <h5>'+ '<div class="dayNumber">' +dia+ '</div>' +' ' + '<div class="monthName">' + dia_texto_mes +'</div><div class="break"></div>' +'</h5><div class="data">'+ dia_data +'</div></div>');
+		 			// $("#semana"+s).append('<div id="'+ dia_id +'" class="'+ dia_class +'"> <h5>'+ dia +' ' + '</h5><div class="data">'+ dia_data +'</div><div class="monthName">'+ dia_texto_mes +'</div></div>');
+		 			
+		 			dayNumber++;
 
 		 		
 			}
